@@ -1,0 +1,188 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alloy-config
+  namespace: monitoring
+data:
+  config.alloy: |-
+    // ===================================================
+    //      SELF MONITORING END
+    // ===================================================
+
+    logging {
+      level = "info"
+      format = "logfmt"
+    }
+
+    // ===================================================
+    //      LOKI INSTANCES START
+    // ===================================================
+
+    // primary loki-write
+    loki.write "default_loki" {
+      endpoint {
+        url                 = "http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push"
+        batch_wait          = "5s"
+        batch_size          = "2MiB"
+        min_backoff_period  = "1m0s"
+        max_backoff_period  = "10m0s"
+        max_backoff_retries = 10000000
+        tenant_id           = "1"
+      }
+      external_labels = {}
+    }
+
+
+    // ===================================================
+    //      LOKI INSTANCES END
+    // ===================================================
+
+
+    // ===================================================
+    //      FREE TEXT JOB START
+    // ===================================================
+    discovery.kubernetes "free_text" {
+      role = "pod"
+
+      selectors {
+        role = "pod"
+        label = "logging.free.text.enabled=true"
+      }
+    }
+
+    discovery.relabel "free_text" {
+      targets = discovery.kubernetes.free_text.targets
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        target_label  = "instance"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        target_label  = "namespace"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        target_label  = "job"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+        separator     = "/"
+        target_label  = "__path__"
+        replacement   = "/var/log/pods/*$1/*.log"
+      }
+    }
+
+    local.file_match "free_text" {
+      path_targets = discovery.relabel.free_text.output
+      sync_period  = "15s"
+    }
+
+    loki.process "free_text" {
+      forward_to = [loki.write.default_loki.receiver]
+
+      stage.json {
+        expressions = {content = "log", timestamp = "time"}
+      }
+
+      stage.timestamp {
+        source = "timestamp"
+        format = "2006-01-02T15:04:05.000000000Z"
+      }
+
+      stage.replace {
+        expression = "(.*)"
+        replace    = "{{ "{{" }} .content }}"
+      }
+
+      stage.label_drop {
+        values = ["filename"]
+      }
+    }
+
+    loki.source.file "free_text" {
+      targets    = local.file_match.free_text.targets
+      forward_to = [loki.process.free_text.receiver]
+
+      file_watch {
+        min_poll_frequency = "500ms"
+        max_poll_frequency = "4s"
+      }
+      legacy_positions_file = "/tmp/positions.yaml"
+    }
+
+
+    // ===================================================
+    //      SELF PARSE JOB START
+    // ===================================================
+
+    discovery.kubernetes "self_parse" {
+      role = "pod"
+
+      namespaces {
+        names = ["monitoring"]
+      }
+
+      selectors {
+        role = "pod"
+        label = "app.kubernetes.io/name=alloy"
+      }
+    }
+
+    discovery.relabel "self_parse" {
+      targets = discovery.kubernetes.self_parse.targets
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        target_label  = "instance"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        target_label  = "job"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+        separator     = "/"
+        target_label  = "__path__"
+        replacement   = "/var/log/pods/*$1/*.log"
+      }
+    }
+
+    local.file_match "self_parse" {
+      path_targets = discovery.relabel.self_parse.output
+      sync_period  = "15s"
+    }
+
+    loki.process "self_parse" {
+      forward_to = [loki.write.default_loki.receiver]
+
+      stage.regex {
+        expression = "^(?P<content>.*$)"
+      }
+
+      stage.label_drop {
+        values = ["filename"]
+      }
+    }
+
+    loki.source.file "self_parse" {
+      targets    = local.file_match.self_parse.targets
+      forward_to = [loki.process.self_parse.receiver]
+
+      file_watch {
+        min_poll_frequency = "500ms"
+        max_poll_frequency = "4s"
+      }
+      legacy_positions_file = "/tmp/positions.yaml"
+    }
+
+    // ===================================================
+    //      SELF PARSE JOB END
+    // ===================================================
+
+

@@ -1,0 +1,16 @@
+{{/*apiVersion: v1*/}}
+{{/*kind: Pod*/}}
+{{/*metadata:*/}}
+{{/*  name: test-alloy*/}}
+{{/*  labels:*/}}
+{{/*    app.kubernetes.io/name: test-alloy*/}}
+{{/*    logging.free.text.enabled: "true"*/}}
+{{/*spec:*/}}
+{{/*  containers:*/}}
+{{/*    - image: busybox*/}}
+{{/*      name: test-alloy*/}}
+{{/*      args:*/}}
+{{/*        - /bin/sh*/}}
+{{/*        - -c*/}}
+{{/*        - counter=0; while true; do msg="ts=$(date '+%Y-%m-%dT%H:%M:%S').000 level=INFO thread=\"1\" traceId=a spanId=b caller=Test msg=\"[AUDIT] testing"; counter=$(( counter + 1));  echo "${msg} ${counter}\""; msg="ts=$(date '+%Y-%m-%dT%H:%M:%S').000 level=WARN thread=\"2\" traceId=c spanId=d caller=SecondTest msg=\"[NORMAL_LOG] testing normal log"; echo "${msg} ${counter}\"";  sleep 5; done*/}}
+{{/*      imagePullPolicy: IfNotPresent*/}}
