@@ -26,7 +26,6 @@ spec:
               https: ""
           ingress:
             enabled: false
-          production: true
   syncPolicy:
     automated:
       prune: true
