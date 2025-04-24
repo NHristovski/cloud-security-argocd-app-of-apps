@@ -12,6 +12,7 @@ spec:
     namespace: keycloak
   sources:
     - repoURL: oci://registry-1.docker.io/bitnamicharts/keycloak
+      chart: keycloak
       targetRevision: 24.6.1
       helm:
         values: |
