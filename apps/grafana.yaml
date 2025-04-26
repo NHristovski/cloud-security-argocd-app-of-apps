@@ -19,7 +19,7 @@ spec:
         env:
           - name: OAUTH_CLIENT_SECRET
             value: 0eRJapXkC3PJrxq5CdhY8DQ1CpRiuxml
-          - name GF_SECURITY_ADMIN_PASSWORD__FILE
+          - name: GF_SECURITY_ADMIN_PASSWORD__FILE
             value: /etc/secrets/admin_password
         datasources:
           datasources.yaml:
