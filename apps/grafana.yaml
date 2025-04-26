@@ -63,7 +63,7 @@ spec:
             root_url: http://localhost:30000/
           auth.generic_oauth:
             enabled: true
-            name: Log in with KEYCLOAK  
+            name: KEYCLOAK  
             allow_sign_up: true
             client_id: grafana 
             client_secret: ${OAUTH_CLIENT_SECRET}
