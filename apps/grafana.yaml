@@ -19,8 +19,6 @@ spec:
         env:
           - name: OAUTH_CLIENT_SECRET
             value: 0eRJapXkC3PJrxq5CdhY8DQ1CpRiuxml
-          - name: GF_SECURITY_ADMIN_PASSWORD__FILE
-            value: /etc/secrets/admin_password
         datasources:
           datasources.yaml:
             apiVersion: 1
@@ -89,7 +87,7 @@ spec:
             auto_assign_org_role: Viewer
             auto_assign_org_id: 1
           security:
-            disable_initial_admin_creation: false
+            disable_initial_admin_creation: true
             allow_embedding: true
             cookie_secure: false
   syncPolicy:
