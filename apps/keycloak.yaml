@@ -20,7 +20,10 @@ spec:
             adminUser: admin
             adminPassword: admin
           service:
-            type: CluserIP
+            type: NodePort
+            nodePorts:
+              http: 30088
+              https: ""
           ingress:
             enabled: false
   syncPolicy:
