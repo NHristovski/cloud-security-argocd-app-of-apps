@@ -16,9 +16,6 @@ spec:
     targetRevision: 8.13.1
     helm:
       values: |
-        env:
-          - name: OAUTH_CLIENT_SECRET
-            value: 0eRJapXkC3PJrxq5CdhY8DQ1CpRiuxml
         datasources:
           datasources.yaml:
             apiVersion: 1
