@@ -16,11 +16,11 @@ spec:
     targetRevision: 8.13.1
     helm:
       values: |
-        env:
-          - name: OAUTH_CLIENT_SECRET
-            value: 0eRJapXkC3PJrxq5CdhY8DQ1CpRiuxml
-          - name: GF_SECURITY_ADMIN_PASSWORD__FILE
-            value: /etc/secrets/admin_password
+        envValueFrom:
+          OAUTH_CLIENT_SECRET:
+            configMapKeyRef:
+              name: keycloak-configmap
+              key: secret
         datasources:
           datasources.yaml:
             apiVersion: 1

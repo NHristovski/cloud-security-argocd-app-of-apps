@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-configmap
+  namespace: keycloak
+data:
+  secret: "0eRJapXkC3PJrxq5CdhY8DQ1CpRiuxml"
