@@ -16,6 +16,10 @@ spec:
     targetRevision: 8.13.1
     helm:
       values: |
+        grafana:
+          env:
+            - name: OAUTH_CLIENT_SECRET
+              value: 0eRJapXkC3PJrxq5CdhY8DQ1CpRiuxml
         datasources:
           datasources.yaml:
             apiVersion: 1
@@ -64,7 +68,7 @@ spec:
             client_id: grafana 
             client_secret: ${OAUTH_CLIENT_SECRET}
             scopes: openid profile email groups roles 
-            auth_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/auth
+            auth_url: http://localhost:30088/realms/grafana/protocol/openid-connect/auth
             token_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/token
             api_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/userinfo
             signout_redirect_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/logout
