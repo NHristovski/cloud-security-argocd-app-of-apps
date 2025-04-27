@@ -77,7 +77,7 @@ spec:
             api_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/userinfo
             signout_redirect_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/logout
             role_attribute_strict: true
-            role_attribute_path = contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
+            role_attribute_path: contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
             allow_assign_grafana_admin: true 
           auth:
             disable_login_form: false
