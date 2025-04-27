@@ -4,4 +4,4 @@ metadata:
   name: keycloak-configmap
   namespace: monitoring
 data:
-  secret: "0eRJapXkC3PJrxq5CdhY8DQ1CpRiuxml"
+  secret: "fkfOMMTgOjCenLqhwQ1c1O0SrODANs9X"
