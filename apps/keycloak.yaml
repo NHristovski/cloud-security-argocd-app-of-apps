@@ -18,7 +18,7 @@ spec:
         values: |
           auth:
             adminUser: admin
-            existingSecret: keycloak-admin-password
+            existingSecret: keycloak-admin-pw
             passwordSecretKey: password
           service:
             type: ClusterIP
