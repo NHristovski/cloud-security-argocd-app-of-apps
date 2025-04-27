@@ -16,11 +16,7 @@ spec:
     targetRevision: 8.13.1
     helm:
       values: |
-        envValueFrom:
-          OAUTH_CLIENT_SECRET:
-            configMapKeyRef:
-              name: keycloak-configmap
-              key: secret
+        envFromSecret: grafana-oidc-client-secret
         datasources:
           datasources.yaml:
             apiVersion: 1
