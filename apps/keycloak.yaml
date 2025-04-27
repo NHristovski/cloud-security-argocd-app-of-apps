@@ -18,7 +18,8 @@ spec:
         values: |
           auth:
             adminUser: admin
-            adminPassword: admin
+            existingSecret: keycloak-admin-password
+            passwordSecretKey: password
           service:
             type: ClusterIP
           ingress:
