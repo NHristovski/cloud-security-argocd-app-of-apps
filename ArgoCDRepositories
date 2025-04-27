@@ -1,0 +1,2 @@
+helm -> https://charts.external-secrets.io
+helm OCI -> registry-1.docker.io
