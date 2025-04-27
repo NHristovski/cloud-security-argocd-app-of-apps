@@ -24,6 +24,13 @@ spec:
             type: ClusterIP
           ingress:
             enabled: false
+          postgresql:
+            enabled: true
+            auth:
+              existingSecret: keycloak-postgre-pw
+              secretKeys:
+                userPasswordKey: password
+  architecture: standalone
   syncPolicy:
     automated:
       prune: true
