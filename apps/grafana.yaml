@@ -58,8 +58,8 @@ spec:
               datasource: Prometheus
         grafana.ini:
           server:
-            domain: http://localhost:30000/
-            root_url: http://localhost:30000/
+            domain: http://grafana.127.0.0.1.sslip.io/
+            root_url: http://grafana.127.0.0.1.sslip.io/
           auth.generic_oauth:
             enabled: true
             name: KEYCLOAK  

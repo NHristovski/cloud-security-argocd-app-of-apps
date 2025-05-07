@@ -741,10 +741,10 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "http://localhost:30000/login/generic_oauth/*"
+        "http://grafana.127.0.0.1.sslip.io/login/generic_oauth/*"
       ],
       "webOrigins": [
-        "http://localhost:30000"
+        "http://grafana.127.0.0.1.sslip.io:80"
       ],
       "notBefore": 0,
       "bearerOnly": false,
