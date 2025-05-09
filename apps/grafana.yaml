@@ -58,8 +58,8 @@ spec:
               datasource: Prometheus
         grafana.ini:
           server:
-            domain: http://grafana.127.0.0.1.sslip.io/
-            root_url: http://grafana.127.0.0.1.sslip.io/
+            domain: https://grafana.127.0.0.1.sslip.io/
+            root_url: https://grafana.127.0.0.1.sslip.io/
           auth.generic_oauth:
             enabled: true
             name: KEYCLOAK  
@@ -70,10 +70,10 @@ spec:
             email_attribute_path: email
             login_attribute_path: username
             name_attribute_path: full_name
-            auth_url: http://keycloak.127.0.0.1.sslip.io/realms/grafana/protocol/openid-connect/auth
+            auth_url: https://keycloak.127.0.0.1.sslip.io/realms/grafana/protocol/openid-connect/auth
             token_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/token
             api_url: http://keycloak.keycloak.svc.cluster.local:80/realms/grafana/protocol/openid-connect/userinfo
-            signout_redirect_url: http://keycloak.127.0.0.1.sslip.io/realms/grafana/protocol/openid-connect/logout
+            signout_redirect_url: https://keycloak.127.0.0.1.sslip.io/realms/grafana/protocol/openid-connect/logout
             role_attribute_path: contains(realm_access.roles[*], 'GrafanaSuperadmin') && 'GrafanaAdmin' || contains(realm_access.roles[*], 'GrafanaAdmin') && 'Admin' || contains(realm_access.roles[*], 'GrafanaEditor') && 'Editor' || 'Viewer'
             role_attribute_strict: true
             allow_assign_grafana_admin: true 

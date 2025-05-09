@@ -6,6 +6,10 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
+  tls:
+    - hosts:
+        - keycloak.127.0.0.1.sslip.io
+      secretName: keycloak-tls
   rules:
     - host: keycloak.127.0.0.1.sslip.io
       http:

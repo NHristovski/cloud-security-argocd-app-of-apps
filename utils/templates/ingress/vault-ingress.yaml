@@ -6,6 +6,10 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
+  tls:
+    - hosts:
+        - vault.127.0.0.1.sslip.io
+      secretName: vault-tls
   rules:
     - host: vault.127.0.0.1.sslip.io
       http:
