@@ -4,7 +4,7 @@ metadata:
   name: keycloak-tls
   namespace: keycloak
 spec:
-  secretName: keycloak-tls
+  secretName: keycloak.127.0.0.1.sslip.io-tls
   issuerRef:
     name: vault-issuer
     kind: ClusterIssuer

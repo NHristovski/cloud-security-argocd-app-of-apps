@@ -28,7 +28,8 @@ spec:
             enabled: true
             ingressClassName: traefik
             hostname: keycloak.127.0.0.1.sslip.io
-            tls: false
+            pathType: Prefix
+            tls: true
           postgresql:
             enabled: true
             auth:
