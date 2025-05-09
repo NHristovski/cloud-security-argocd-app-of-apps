@@ -39,7 +39,6 @@ spec:
               existingSecret: keycloak-postgre-pw
               secretKeys:
                 userPasswordKey: password
-  architecture: standalone
   syncPolicy:
     automated:
       prune: true
