@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  secretName: grafana-tls
+  issuerRef:
+    name: vault-issuer
+  commonName: grafana.127.0.0.1.sslip.io
+  dnsNames:
+    - grafana.127.0.0.1.sslip.io
