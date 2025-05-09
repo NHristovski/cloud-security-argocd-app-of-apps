@@ -30,6 +30,10 @@ spec:
             hostname: keycloak.127.0.0.1.sslip.io
             pathType: Prefix
             tls: true
+            extraTls:
+              - hosts:
+                - keycloak.127.0.0.1.sslip.io
+                secretName: keycloak.127.0.0.1.sslip.io-tls
           postgresql:
             enabled: true
             auth:
