@@ -10,7 +10,7 @@ spec:
   tls:
     - hosts:
         - grafana.127.0.0.1.sslip.io
-      secretName: grafanatls-pj6sk
+      secretName: grafana-new-tls
   rules:
     - host: grafana.127.0.0.1.sslip.io
       http:
