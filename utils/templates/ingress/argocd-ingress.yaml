@@ -4,6 +4,7 @@ metadata:
   name: argocd-ingress
   namespace: argocd
   annotations:
+    traefik.ingress.kubernetes.io/service.serversscheme: https
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   rules:
