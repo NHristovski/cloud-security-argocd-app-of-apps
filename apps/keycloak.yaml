@@ -18,6 +18,15 @@ spec:
       targetRevision: 24.6.1
       helm:
         values: |
+          ingress:
+            enabled: true
+            ingressClassName: traefik
+            hostname: keycloak.127.0.0.1.sslip.io
+            tls: true
+            extraTls:
+              - hosts:
+                - keycloak.127.0.0.1.sslip.io
+              secretName: keycloak-tls
           auth:
             adminUser: admin
             existingSecret: keycloak-admin-pw
