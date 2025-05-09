@@ -18,6 +18,12 @@ spec:
       targetRevision: 24.6.1
       helm:
         values: |
+          auth:
+            adminUser: admin
+            existingSecret: keycloak-admin-pw
+            passwordSecretKey: password
+          service:
+            type: ClusterIP
           ingress:
             enabled: true
             ingressClassName: traefik
@@ -27,14 +33,6 @@ spec:
               - hosts:
                 - keycloak.127.0.0.1.sslip.io
               secretName: keycloak-tls
-          auth:
-            adminUser: admin
-            existingSecret: keycloak-admin-pw
-            passwordSecretKey: password
-          service:
-            type: ClusterIP
-          ingress:
-            enabled: false
           postgresql:
             enabled: true
             auth:
