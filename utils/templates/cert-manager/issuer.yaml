@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: vault-issuer
+  namespace: vault
+spec:
+  vault:
+    server: http://vault-server.vault.svc.cluster.local:8200
+    path: pki/sign/sslip-dot-io
+    auth:
+      kubernetes:
+        mountPath: /v1/auth/kubernetes
+        role: issuer
+        secretRef:
+          name: issuer-token
+          key: token

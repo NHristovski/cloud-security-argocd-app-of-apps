@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: keycloak-configmap
-  namespace: monitoring
-data:
-  secret: "fkfOMMTgOjCenLqhwQ1c1O0SrODANs9X"
