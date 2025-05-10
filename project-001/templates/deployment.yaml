@@ -47,7 +47,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.secrets.redis.name }}
-                  key: {{ .Values.secrets.redis.name }}
+                  key: {{ .Values.secrets.redis.key }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
