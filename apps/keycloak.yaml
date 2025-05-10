@@ -40,6 +40,11 @@ spec:
               existingSecret: keycloak-postgre-pw
               secretKeys:
                 userPasswordKey: password
+          extraEnvVars:
+            - name: KC_HOSTNAME_URL
+              value: https://keycloak.127.0.0.1.sslip.io
+            - name: KC_HOSTNAME_ADMIN_URL
+              value: https://keycloak.127.0.0.1.sslip.io
   syncPolicy:
     automated:
       prune: true
