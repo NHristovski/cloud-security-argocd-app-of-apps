@@ -96,7 +96,7 @@ spec:
           
           annotations: 
             cert-manager.io/cluster-issuer: vault-issuer
-            traefik.ingress.kubernetes.io/whitelist-source-range: "10.10.10.10/32"
+            traefik.ingress.kubernetes.io/router.middlewares: default-ipallowlist@kubernetescrd
             
           path: /
           pathType: Prefix
