@@ -40,7 +40,7 @@ helm.sh/chart: {{ include "occurance-traker.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-logging.enabled: true
+logging.enabled: "true"
 {{- end }}
 
 {{/*
