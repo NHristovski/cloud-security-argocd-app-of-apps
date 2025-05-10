@@ -1,4 +1,5 @@
 redis:
+  fullnameOverride: redis
   global:
     redis:
       password: redis
