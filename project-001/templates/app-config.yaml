@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: occurrance-traker
+data:
+  application.yaml: |
+    spring:
+      application:
+        name: OccurenceTrakerApplication
+      data:
+        redis:
+          host: redis-master.project-001.svc.cluster.local
+          port: 6379
+          usePassword: true
+          password: reddis

@@ -1,0 +1,66 @@
+redis:
+  global:
+    redis:
+      password: redis
+
+# Default values for occurance-traker.
+replicaCount: 1
+
+image:
+  repository: nikolahristovski/ghoccurancetraker
+  pullPolicy: IfNotPresent
+  tag: "1.23.0"
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  className: "traefik"
+  annotations:
+    cert-manager.io/cluster-issuer: vault-issuer
+    traefik.ingress.kubernetes.io/router.middlewares: monitoring-secure-access@kubernetescrd
+  hosts:
+    - host: occurance-traker.127.0.0.1.sslip.io
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: occurance-traker-tls
+      hosts:
+        - occurance-traker.127.0.0.1.sslip.io
+
+livenessProbe:
+  httpGet:
+    path: /actuator/health/readiness
+    port: 8080
+  initialDelaySeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 5
+readinessProbe:
+  httpGet:
+    path: /actuator/health/readiness
+    port: 8080
+  initialDelaySeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 5
+
+
+volumes:
+  - name: config
+    configMap:
+      name: occurrance-traker
+
+volumeMounts:
+  - name: config
+    mountPath: /sb/config/application.yaml
+    subPath: application.yaml
+    readOnly: true
