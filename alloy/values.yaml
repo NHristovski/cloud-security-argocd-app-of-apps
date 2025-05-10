@@ -1,0 +1,40 @@
+alloy:
+
+  fullnameOverride: alloy
+
+  serviceAccount:
+    create: true
+    name: "alloy"
+
+  controller:
+    type: 'daemonset'
+    tolerations:
+      - effect: NoSchedule
+        operator: Exists
+
+    volumes:
+      extra:
+        - name: tmp
+          hostPath:
+            path: /tmp
+
+  alloy:
+    enableReporting: false
+
+    mounts:
+      varlog: true
+      dockercontainers: true
+
+      extra:
+        - name: tmp
+          mountPath: /tmp
+
+    clustering:
+      enabled: false
+
+    uiPathPrefix: /alloy/
+
+    configMap:
+      create: false
+      name: alloy-config
+      key: config.alloy

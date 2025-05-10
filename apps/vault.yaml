@@ -16,6 +16,20 @@ spec:
     - repoURL: registry-1.docker.io/bitnamicharts
       chart: vault
       targetRevision: 1.7.5
+      helm:
+        values: |
+          server:
+            ingress:
+              enabled: true
+              ingressClassName: traefik
+              hostname: vault.127.0.0.1.sslip.io
+              pathType: Prefix
+              extraTls:
+                - hosts:
+                  - vault.127.0.0.1.sslip.io
+                  secretName: vault-tls
+              annotations:
+                cert-manager.io/cluster-issuer: vault-issuer
   syncPolicy:
     automated:
       prune: true
