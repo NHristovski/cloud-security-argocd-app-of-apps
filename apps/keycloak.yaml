@@ -18,6 +18,8 @@ spec:
       targetRevision: 24.6.1
       helm:
         values: |
+          production: true
+          proxy: edge
           auth:
             adminUser: admin
             existingSecret: keycloak-admin-pw
