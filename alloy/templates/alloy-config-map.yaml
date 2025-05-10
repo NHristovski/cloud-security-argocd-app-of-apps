@@ -39,19 +39,19 @@ data:
 
 
     // ===================================================
-    //      FREE TEXT JOB START
+    //      STANDARD JOB START
     // ===================================================
-    discovery.kubernetes "free_text" {
+    discovery.kubernetes "standard_job" {
       role = "pod"
 
       selectors {
         role = "pod"
-        label = "logging.free.text.enabled=true"
+        label = "logging.enabled=true"
       }
     }
 
-    discovery.relabel "free_text" {
-      targets = discovery.kubernetes.free_text.targets
+    discovery.relabel "standard_job" {
+      targets = discovery.kubernetes.standard_job.targets
 
       rule {
         source_labels = ["__meta_kubernetes_pod_name"]
@@ -76,12 +76,12 @@ data:
       }
     }
 
-    local.file_match "free_text" {
-      path_targets = discovery.relabel.free_text.output
+    local.file_match "standard_job" {
+      path_targets = discovery.relabel.standard_job.output
       sync_period  = "15s"
     }
 
-    loki.process "free_text" {
+    loki.process "standard_job" {
       forward_to = [loki.write.default_loki.receiver]
 
       stage.json {
@@ -103,9 +103,9 @@ data:
       }
     }
 
-    loki.source.file "free_text" {
-      targets    = local.file_match.free_text.targets
-      forward_to = [loki.process.free_text.receiver]
+    loki.source.file "standard_job" {
+      targets    = local.file_match.standard_job.targets
+      forward_to = [loki.process.standard_job.receiver]
 
       file_watch {
         min_poll_frequency = "500ms"
