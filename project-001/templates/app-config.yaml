@@ -13,3 +13,6 @@ data:
           port: 6379
           usePassword: true
           password: ${REDIS_PASSWORD}
+    logging:
+      pattern:
+        console: ts=%d{yyyy-MM-dd'T'HH:mm:ss.SSS} level=%level thread="%t" traceId=%X{traceId} spanId=%X{spanId} %replace(%replace(%X{trackingKey}){'"', '\''}){'([^=]+)=\'?([^,]+)\'?,?', '$1="$2" '} caller=%c{1} msg="%replace(%msg){'"', '\''} %replace(%xEx){'"', '\''}"%n
