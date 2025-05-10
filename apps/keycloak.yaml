@@ -49,6 +49,16 @@ spec:
               value: https://keycloak.127.0.0.1.sslip.io
             - name: KC_HOSTNAME_ADMIN_URL
               value: https://keycloak.127.0.0.1.sslip.io
+            - name: KEYCLOAK_EXTRA_ARGS
+              value: "--import-realm"
+          extraVolumeMounts:
+            - name: realm-secret
+              mountPath: "/opt/bitnami/keycloak/data/import"
+              readOnly: true
+          extraVolumes:
+            - name: realm-secret
+              secret:
+                secretName: keycloak-grafana-realm
   syncPolicy:
     automated:
       prune: true

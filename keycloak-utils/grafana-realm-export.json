@@ -739,7 +739,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "pBpGi5EgpXORPOx3oKEynuVZ361psZwm",
       "redirectUris": [
         "https://grafana.127.0.0.1.sslip.io/login/generic_oauth/*"
       ],
