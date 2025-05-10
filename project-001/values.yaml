@@ -4,7 +4,10 @@ redis:
     redis:
       password: redis
 
+
 # Default values for occurance-traker.
+fullnameOverride: occurance-traker
+
 replicaCount: 1
 
 image:
