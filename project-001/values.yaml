@@ -14,7 +14,7 @@ replicaCount: 1
 image:
   repository: nikolahristovski/ghoccurancetraker
   pullPolicy: IfNotPresent
-  tag: "v1.23.0"
+  tag: "v1.24.0"
 
 serviceAccount:
   create: true
