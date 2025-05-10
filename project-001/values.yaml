@@ -58,7 +58,6 @@ readinessProbe:
   timeoutSeconds: 5
   failureThreshold: 5
 
-
 volumes:
   - name: config
     configMap:
@@ -69,3 +68,8 @@ volumeMounts:
     mountPath: /sb/config/application.yaml
     subPath: application.yaml
     readOnly: true
+
+secrets:
+  redis:
+    name: redis-password
+    key: password
