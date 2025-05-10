@@ -35,7 +35,9 @@ spec:
             extraTls:
               - hosts:
                 - keycloak.127.0.0.1.sslip.io
-                secretName: keycloak.127.0.0.1.sslip.io-tls
+                secretName: keycloak-tls
+            annotations:
+              cert-manager.io/cluster-issuer: vault-issuer
           postgresql:
             enabled: true
             auth:
