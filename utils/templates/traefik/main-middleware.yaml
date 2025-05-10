@@ -8,3 +8,5 @@ spec:
     middlewares:
       - name: ip-allowlist
       - name: rate-limit
+      - name: redirect-scheme
+      - name: inflight-limit

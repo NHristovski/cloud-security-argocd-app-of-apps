@@ -37,6 +37,7 @@ spec:
                 secretName: keycloak-tls
             annotations:
               cert-manager.io/cluster-issuer: vault-issuer
+              traefik.ingress.kubernetes.io/router.middlewares: monitoring-secure-access@kubernetescrd
           postgresql:
             enabled: true
             auth:
