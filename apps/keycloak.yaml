@@ -18,6 +18,13 @@ spec:
       targetRevision: 24.6.1
       helm:
         values: |
+         resources:
+           requests:
+             cpu: 1
+             memory: 512Mi
+           limits:
+             cpu: 10
+             memory: 2048Mi
           production: true
           proxy: edge
           auth:
