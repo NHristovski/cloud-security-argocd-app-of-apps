@@ -1,9 +1,10 @@
 redis:
   fullnameOverride: redis
-  global:
-    redis:
-      password: redis
-
+  auth:
+    existingSecret: redis-password
+    existingSecretPasswordKey: password
+  replica:
+    replicaCount: 0
 
 # Default values for occurance-traker.
 fullnameOverride: occurance-traker

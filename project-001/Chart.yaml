@@ -27,5 +27,5 @@ dependencies:
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
     chart: redis
-    version: 20.7.0
+    version: 21.0.2
 
