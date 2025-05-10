@@ -496,6 +496,64 @@
   "webAuthnPolicyPasswordlessExtraOrigins": [],
   "users": [
     {
+      "id": "1ee85635-23fb-423f-964f-2f1dd9f7a729",
+      "username": "admin",
+      "firstName": "Admin",
+      "lastName": "Grafana",
+      "email": "grafanaadmin@example.com",
+      "emailVerified": true,
+      "createdTimestamp": 1746897271132,
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "id": "e13d8bee-4020-491c-b131-25570f20b40e",
+          "type": "password",
+          "userLabel": "My password",
+          "createdDate": 1746897279128,
+          "secretData": "{\"value\":\"JrsRkaXs4lOZxqXk/7n6SiJn8qVa3Os8h9ua9XHZzII=\",\"salt\":\"xuWjnEnCdTSDpOUT4N0Ssw==\",\"additionalParameters\":{}}",
+          "credentialData": "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-grafana",
+        "GrafanaAdmin"
+      ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "a6affa3b-7182-4607-97b1-235850462ef8",
+      "username": "editor",
+      "firstName": "Editor",
+      "lastName": "Grafana",
+      "email": "grafanaeditor@example.com",
+      "emailVerified": true,
+      "createdTimestamp": 1746897229807,
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "id": "419cd514-6524-4109-8a74-9f0da77b113c",
+          "type": "password",
+          "userLabel": "My password",
+          "createdDate": 1746897241874,
+          "secretData": "{\"value\":\"Nixdy4DP3Ksxj6a5tdbi7DrCXvfyLDPEHKuRKFUtVDc=\",\"salt\":\"1fE4I307yXc2AgPH+TEE7Q==\",\"additionalParameters\":{}}",
+          "credentialData": "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "GrafanaEditor",
+        "default-roles-grafana"
+      ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
       "id": "49f7c915-0760-4125-9bf1-38b252e4e465",
       "username": "service-account-grafana",
       "emailVerified": false,
@@ -503,6 +561,7 @@
       "enabled": true,
       "totp": false,
       "serviceAccountClientId": "grafana",
+      "credentials": [],
       "disableableCredentialTypes": [],
       "requiredActions": [],
       "realmRoles": [
