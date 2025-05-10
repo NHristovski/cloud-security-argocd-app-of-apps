@@ -90,6 +90,22 @@ spec:
             disable_initial_admin_creation: true
             allow_embedding: true
             cookie_secure: false
+        ingress:
+          enabled: true          
+          ingressClassName: traefik
+          
+          annotations: 
+            cert-manager.io/cluster-issuer: vault-issuer
+            
+          path: /
+          pathType: Prefix
+          hosts:
+            - grafana.127.0.0.1.sslip.io
+
+          tls: 
+            - secretName: grafana-tls
+              hosts:
+                - grafana.127.0.0.1.sslip.io
   syncPolicy:
     automated:
       prune: true
