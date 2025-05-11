@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: sentence-processor
+    logging.enabled: 'true'
+  name: sentence-processor
+  namespace: project-001
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sentence-processor
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sentence-processor
+        logging.enabled: 'true'
+    spec:
+      containers:
+        - image: nikolahristovski/devopsmasterstudies-sentenceprocessor:1.0.2
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: sentence-processor
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          volumeMounts:
+            - mountPath: /sb/config/application.yaml
+              name: config
+              readOnly: true
+              subPath: application.yaml
+      restartPolicy: Always
+      serviceAccountName: occurance-traker
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: sentence-processor
+          name: config

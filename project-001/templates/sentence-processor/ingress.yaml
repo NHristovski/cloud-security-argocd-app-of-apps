@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: vault-issuer
+    traefik.ingress.kubernetes.io/router.middlewares: monitoring-secure-access@kubernetescrd
+  labels:
+    app.kubernetes.io/name: sentence-processor
+  name: sentence-processor
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: sentence-processor.127.0.0.1.sslip.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: sentence-processor
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - sentence-processor.127.0.0.1.sslip.io
+      secretName: sentence-processor-tls

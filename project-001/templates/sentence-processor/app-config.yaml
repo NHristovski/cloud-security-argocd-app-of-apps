@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sentence-processor
+data:
+  application.yaml: |
+    spring:
+      application:
+        name: SentenceProcessor
+
+    occuranceTraker:
+      url: http://occurance-traker.project-001.svc.cluster.local:8080/add
+    logging:
+      pattern:
+        console: ts=%d{yyyy-MM-dd'T'HH:mm:ss.SSS} level=%level thread="%t" traceId=%X{traceId} spanId=%X{spanId} %replace(%replace(%X{trackingKey}){'"', '\''}){'([^=]+)=\'?([^,]+)\'?,?', '$1="$2" '} caller=%c{1} msg="%replace(%msg){'"', '\''} %replace(%xEx){'"', '\''}"%n
