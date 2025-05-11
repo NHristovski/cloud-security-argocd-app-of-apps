@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-loki
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-loki
+  template:
+    metadata:
+      labels:
+        app: nginx-loki
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+            - name: auth
+              mountPath: /etc/nginx/auth
+          ports:
+            - containerPort: 80
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-loki-config
+        - name: auth
+          secret:
+            secretName: loki-basic-auth
