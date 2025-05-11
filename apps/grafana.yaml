@@ -32,6 +32,7 @@ spec:
                 access: proxy
                 type: loki
                 url: http://nginx-loki-proxy.monitoring.svc.cluster.local:3100
+                basicAuth: true
                 user: project001
                 secureJsonData:
                   password: ${PROJECT001_PASSWORD}
