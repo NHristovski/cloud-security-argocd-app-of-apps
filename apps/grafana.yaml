@@ -31,12 +31,11 @@ spec:
               - name: loki-project001
                 access: proxy
                 type: loki
-                url: http://nginx-loki-proxy.monitoring.svc.cluster.local:3100
-                basicAuth: true
+                url: http://nginx-loki-proxy.monitoring.svc.cluster.local:80
                 user: project001
+                basicAuth: true
                 secureJsonData:
-                  password: ${PROJECT001_PASSWORD}
-                
+                  password: $__file{/etc/secrets/PROJECT001_PASSWORD}                
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
@@ -106,6 +105,11 @@ spec:
             - secretName: grafana-tls
               hosts:
                 - grafana.127.0.0.1.sslip.io
+        extraSecretMounts:
+          - name: loki-datasource-secret
+            secretName: loki-datasource-secret
+            mountPath: /etc/secrets
+            readOnly: true
   syncPolicy:
     automated:
       prune: true
