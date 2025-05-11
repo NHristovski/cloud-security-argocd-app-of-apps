@@ -5,6 +5,12 @@ metadata:
   namespace: monitoring
 data:
   default.conf: |
+    map $remote_user $org_id {
+        default "";
+        project001 "project001";
+        admin "project002";
+    }
+
     server {
       listen 80;
 
@@ -12,17 +18,7 @@ data:
         auth_basic "Loki Auth";
         auth_basic_user_file /etc/nginx/auth/.htpasswd;
 
-        set $org_id "";
-
-        if ($remote_user = "project001") {
-            set $org_id "project001";
-        }
-
-        if ($remote_user = "admin") {
-            set $org_id "project002";
-        }
-
         proxy_set_header X-Scope-OrgID $org_id;
-        proxy_pass http://loki.monitoring.svc.cluster.local:3100
+        proxy_pass http://loki:3100;
       }
     }
