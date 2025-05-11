@@ -29,8 +29,8 @@ data:
         max_backoff_retries = 10000000
 {{/*        tenant_id           = "1"*/}}
         basic_auth {
-          username          = admin
-          password          = admin
+          username          = "admin"
+          password          = "admin"
         }
       }
       external_labels = {}
