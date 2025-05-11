@@ -28,15 +28,13 @@ spec:
                 url: http://prometheus-server.monitoring.svc.cluster.local
                 access: proxy
                 isDefault: true
-              - name: loki
+              - name: loki-project001
                 access: proxy
                 type: loki
-                jsonData:
-                  httpHeaderName1: X-Scope-OrgID
+                url: http://nginx-loki-proxy.monitoring.svc.cluster.local:3100
+                user: project001
                 secureJsonData:
-                  httpHeaderValue1: 1
-                orgId: 1
-                url: http://loki.monitoring.svc.cluster.local:3100
+                  password: ${PROJECT001_PASSWORD}
                 
         dashboardProviders:
           dashboardproviders.yaml:

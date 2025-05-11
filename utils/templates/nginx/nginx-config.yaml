@@ -8,7 +8,7 @@ data:
     map $remote_user $org_id {
         default "";
         project001 "project001";
-        admin "project002";
+        admin "admin";
     }
 
     server {
