@@ -21,7 +21,7 @@ data:
     // primary loki-write
     loki.write "default_loki" {
       endpoint {
-        url                 = "http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push"
+        url                 = "http://nginx-loki-proxy.monitoring.svc.cluster.local/loki/api/v1/push"
         batch_wait          = "5s"
         batch_size          = "2MiB"
         min_backoff_period  = "1m0s"
