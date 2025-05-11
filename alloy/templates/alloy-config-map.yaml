@@ -27,7 +27,11 @@ data:
         min_backoff_period  = "1m0s"
         max_backoff_period  = "10m0s"
         max_backoff_retries = 10000000
-        tenant_id           = "1"
+{{/*        tenant_id           = "1"*/}}
+        basic_auth {
+          username          = admin
+          password          = admin
+        }
       }
       external_labels = {}
     }
