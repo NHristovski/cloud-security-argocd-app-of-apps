@@ -38,3 +38,7 @@ alloy:
       create: false
       name: alloy-config
       key: config.alloy
+
+    envFrom:
+      secretRef:
+        name: grafana-oidc-client-secret
