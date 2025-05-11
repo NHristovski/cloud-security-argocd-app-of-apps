@@ -19,7 +19,7 @@ spec:
         logging.enabled: 'true'
     spec:
       containers:
-        - image: nikolahristovski/devopsmasterstudies-sentenceprocessor:1.0.2
+        - image: nikolahristovski/devopsmasterstudies-sentenceprocessor:1.0.3
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 5
