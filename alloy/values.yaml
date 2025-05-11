@@ -40,5 +40,5 @@ alloy:
       key: config.alloy
 
     envFrom:
-      secretRef:
-        name: "grafana-oidc-client-secret"
+      - secretRef:
+          name: "grafana-oidc-client-secret"
