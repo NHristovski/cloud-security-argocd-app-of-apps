@@ -21,9 +21,6 @@ spec:
           crds:
             enabled: true
   syncPolicy:
-    managedNamespaceMetadata:
-      labels:
-        istio-injection: enabled
     automated:
       prune: true
       selfHeal: true
