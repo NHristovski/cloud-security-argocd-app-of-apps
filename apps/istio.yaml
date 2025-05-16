@@ -29,6 +29,7 @@ spec:
         
           env:
             ENABLE_CA_SERVER: false
+            CA_ADDR: cert-manager-istio-csr.cert-manager.svc:443
         
           volumeMounts:
             - mountPath: /etc/cert-manager/tls
