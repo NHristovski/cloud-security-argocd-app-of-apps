@@ -21,7 +21,7 @@ spec:
         values: |
           service:
             type: ClusterIP
-          # Additional container arguments
+
           extraContainerArgs:
             - --tlsCertFile=/etc/cert-manager/tls/tls.crt
             - --tlsKeyFile=/etc/cert-manager/tls/tls.key
@@ -30,7 +30,6 @@ spec:
           env:
             ENABLE_CA_SERVER: false
         
-          # Additional volumeMounts to the istiod container
           volumeMounts:
             - mountPath: /etc/cert-manager/tls
               name: cert-manager
@@ -39,7 +38,6 @@ spec:
               name: istio-csr-ca-configmap
               readOnly: true
         
-          # Additional volumes to the istiod pod
           volumes: []
             - name: cert-manager
               secret:
