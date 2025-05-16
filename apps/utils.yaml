@@ -17,6 +17,9 @@ spec:
       path: utils
       targetRevision: main
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
     automated:
       prune: true
       selfHeal: true

@@ -57,6 +57,9 @@ spec:
           backend:
            replicas: 0
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
     automated:
       prune: true
       selfHeal: true

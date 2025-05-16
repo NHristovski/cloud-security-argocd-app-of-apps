@@ -84,6 +84,9 @@ spec:
               scrape_interval: 5s
               scrape_timeout: 4s
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
     automated:
       prune: true
       selfHeal: true

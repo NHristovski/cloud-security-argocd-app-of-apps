@@ -17,6 +17,9 @@ spec:
       path: alloy
       targetRevision: main
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
     automated:
       prune: true
       selfHeal: true

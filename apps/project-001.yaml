@@ -17,6 +17,9 @@ spec:
       path: project-001
       targetRevision: main
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
     automated:
       prune: true
       selfHeal: true

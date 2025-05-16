@@ -32,6 +32,9 @@ spec:
                 cert-manager.io/cluster-issuer: vault-issuer
                 traefik.ingress.kubernetes.io/router.middlewares: monitoring-secure-access@kubernetescrd
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
     automated:
       prune: true
       selfHeal: true

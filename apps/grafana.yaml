@@ -111,6 +111,9 @@ spec:
             mountPath: /etc/secrets
             readOnly: true
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
     automated:
       prune: true
       selfHeal: true
