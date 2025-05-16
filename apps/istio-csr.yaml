@@ -26,6 +26,9 @@ spec:
                 kind: ClusterIssuer
                 group: cert-manager.io
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
     automated:
       prune: true
       selfHeal: true
