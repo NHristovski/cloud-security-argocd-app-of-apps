@@ -20,6 +20,8 @@ spec:
         values: |
           controller:
             service:
+              externalIPs:
+                - 192.168.64.2
               loadBalancerIP: 192.168.64.2
   syncPolicy:
     automated:
