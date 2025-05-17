@@ -1,0 +1,105 @@
+!!!!!!!!! KUBERNETES VERSION 1.31.8
+
+
+
+ vault operator init
+
+Unseal Key 1: a3+84Zapr5X+qw5gfKwlUarhLwL9gQWAJXtziFstwuvN
+Unseal Key 2: 0/XTCe3LBi+XQIztcPEJNB9nhcrpDUzpo9/TZZjGcnlj
+Unseal Key 3: kewyl1tpaYcnTBwDD11sRJfCdrJElOqwok5FZLiUx4pV
+Unseal Key 4: i9N/amRyLYHvOTfN535ld3EWOVvxs6fftKgwdivkPtJ0
+Unseal Key 5: YNa00zd2KKteUvMclFSPHwZYKhx6o2c8oeRXA7LHqhJi
+
+vault operator unseal a3+84Zapr5X+qw5gfKwlUarhLwL9gQWAJXtziFstwuvN
+vault operator unseal 0/XTCe3LBi+XQIztcPEJNB9nhcrpDUzpo9/TZZjGcnlj
+vault operator unseal kewyl1tpaYcnTBwDD11sRJfCdrJElOqwok5FZLiUx4pV
+
+Initial Root Token: hvs.YoBECx7Lq5f82CCK7WewMLh7
+
+https://developer.hashicorp.com/vault/tutorials/archive/kubernetes-cert-manager
+
+>
+export VAULT_ROOT_TOKEN=hvs.YoBECx7Lq5f82CCK7WewMLh7
+
+vault login $VAULT_ROOT_TOKEN
+
+vault secrets enable pki
+
+#Configure the max lease time-to-live (TTL) to 8760h.
+vault secrets tune -max-lease-ttl=8760h pki
+
+vault write pki/root/generate/internal common_name=sslip.io ttl=8760h
+
+-----BEGIN CERTIFICATE-----
+MIIDLDCCAhSgAwIBAgIUDfOJI7C1im3N8uCKrmkpuascVu0wDQYJKoZIhvcNAQEL
+BQAwEzERMA8GA1UEAxMIc3NsaXAuaW8wHhcNMjUwNTE2MjAzMDEwWhcNMjYwNTE2
+MjAzMDM5WjATMREwDwYDVQQDEwhzc2xpcC5pbzCCASIwDQYJKoZIhvcNAQEBBQAD
+ggEPADCCAQoCggEBANJycrK+bxQQfCM5UKFVIpQxTMJd6OySkhOwe7mm7mNly/qw
+ufj4XgLCyfA8z7joPW0UMTl3u/psFgjWwbilpzkgFJAp0AA0vswg871kCeLOM2vu
+XiHFqrRnPGTusQUSvVetaY8Fn9QX9C10mbkc3H7X5jiwrj4ztTE9mAXoCGiIc8kq
+R6kT2Wb7qNSJb0sF/sdoRAnsreoWSMPP2sWW6I5wXlCzufzKh6lEDnbtsDq5KS/K
+fcXpqdqWM77VWZG8zolT9o5pHZ9YEd8xlXAnrmFIIW62fgqfS6AeibcT7zqvlzcM
+pq60rQXaNbYrvAMnLdbErt5Sfwp4S3nzOTdryJECAwEAAaN4MHYwDgYDVR0PAQH/
+BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFLrmJWV8d0QamCUm2n0b
+ZqPWevG7MB8GA1UdIwQYMBaAFLrmJWV8d0QamCUm2n0bZqPWevG7MBMGA1UdEQQM
+MAqCCHNzbGlwLmlvMA0GCSqGSIb3DQEBCwUAA4IBAQDLHQFc6wF9OeoXhMr/Vami
+7vWbAUgBCy+c08IFAOsI/8cmxSb3GOoqopHcRiwKAvTveWNAlvqqJxe2D75XUUD9
+rRZHFcTUmHcX14vnqs04rtxMox/sjwHd20UXNVmnB6SKPo2CbQGI3ERq3sU6GoOf
+/VUk+UlldHqQH1NcXVPqPYGrF9NMjC6GCVh028Q5EhO0jicESPZ+hOm1An8j/nQs
+x6PNiUfBJZpFICXmLctxQJAT7EXPnoutS6u1Y8ZUW7ylgEUy+5H0dc+zG6aYVyjI
+aiz/6WCZ3xuL4ZoqTqZlVBvW3EBH5ZIiVMNCILgnGqMCUC4cmgFYUat9rDe85BY8
+-----END CERTIFICATE-----
+
+
+vault write pki/config/urls issuing_certificates="http://vault-server.vault.svc.cluster.local:8200/v1/pki/ca" crl_distribution_points="http://vault-server.vault.svc.cluster.local:8200/v1/pki/crl"
+
+vault write pki/roles/sslip-dot-io allowed_domains=sslip.io,svc allow_subdomains=true max_ttl=72h generate_lease=true allow_glob_domains=true require_cn=false allowed_uri_sans=*
+
+vault policy write pki - <<EOF
+path "pki*"                        { capabilities = ["read", "list"] }
+path "pki/sign/sslip-dot-io"    { capabilities = ["create", "update"] }
+path "pki/issue/sslip-dot-io"   { capabilities = ["create"] }
+EOF
+
+
+vault auth enable kubernetes
+
+vault write auth/kubernetes/config kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443"
+
+vault write auth/kubernetes/role/issuer bound_service_account_names=issuer bound_service_account_namespaces=cert-manager policies=pki ttl=20m
+
+
+
+
+NGINX PROXY:
+
+root@8c89c46e898b:/usr/local/apache2# htpasswd -cb /tmp/pw admin admin
+Adding password for user admin
+root@8c89c46e898b:/usr/local/apache2# htpasswd -b /tmp/pw project001 project001
+Adding password for user project001
+root@8c89c46e898b:/usr/local/apache2# cat /tmp/pw
+admin:$apr1$RFpNGOGC$n.qXpEfkzjzRZXfi37YBO/
+project001:$apr1$AO3bLnmv$BfkAmT7x1f8oQzbqTSBo.0
+
+
+
+
+
+=========
+
+All secrets:
+1. grafana-realm | grafana-realm - > {
+                                       "id": "87e35ed8-1e73-4bc0-8fbe-2408f6c25ff5",
+                                       "realm": "grafana",
+                                       ...
+
+2. keycloak-admin-password | password -> admin
+3. keycloak-postgre-pw  | password -> admin
+4. nginx-basic-auth | .htpasswd -> admin:$apr1$RFpNGOGC$n.qXpEfkzjzRZXfi37YBO/
+                                   project001:$apr1$AO3bLnmv$BfkAmT7x1f8oQzbqTSBo.0
+
+5. oidc_client_secret | secret -> pBpGi5EgpXORPOx3oKEynuVZ361psZwm
+
+6. redis-password | password -> redis
+
+7. loki-datasource-password |  project001_password -> project001
