@@ -112,7 +112,7 @@ spec:
             readOnly: true
         extraConfigmapMounts:
           - name: istio-dashboard-configmap
-            mountPath: /var/lib/grafana/dashboards/default
+            mountPath: /var/lib/grafana/dashboards/default/istio.json
             subPath: "istio.json" 
             configMap: istio-dashboard
             readOnly: true
