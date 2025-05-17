@@ -22,7 +22,7 @@ spec:
                   number: 8080
             path: /
             pathType: Prefix
-{{/*  tls:*/}}
-{{/*    - hosts:*/}}
-{{/*        - sentence-processor-nginx.127.0.0.1.sslip.io*/}}
-{{/*      secretName: sentence-processor-nginx-tls*/}}
+  tls:
+    - hosts:
+        - sentence-processor-nginx.127.0.0.1.sslip.io
+      secretName: sentence-processor-nginx-tls
