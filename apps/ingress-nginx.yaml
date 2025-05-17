@@ -19,6 +19,7 @@ spec:
       helm:
         values: |
           controller:
+            allowSnippetAnnotations: true
             admissionWebhooks:
               patch:
                 labels:
