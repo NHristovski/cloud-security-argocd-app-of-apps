@@ -24,6 +24,9 @@ spec:
                 - 192.168.64.2
               loadBalancerIP: 192.168.64.2
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
     automated:
       prune: true
       selfHeal: true
