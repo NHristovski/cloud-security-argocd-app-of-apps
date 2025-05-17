@@ -3,6 +3,10 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: vault-issuer
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_ssl_name "sentence-processor.project-001.svc.cluster.local";
+      proxy_ssl_server_name on;
   labels:
     app.kubernetes.io/name: sentence-processor
   name: sentence-processor-nginx
@@ -19,7 +23,7 @@ spec:
                   number: 8080
             path: /
             pathType: Prefix
-  tls:
-    - hosts:
-        - sentence-processor-nginx.127.0.0.1.sslip.io
-      secretName: sentence-processor-nginx-tls
+{{/*  tls:*/}}
+{{/*    - hosts:*/}}
+{{/*        - sentence-processor-nginx.127.0.0.1.sslip.io*/}}
+{{/*      secretName: sentence-processor-nginx-tls*/}}
