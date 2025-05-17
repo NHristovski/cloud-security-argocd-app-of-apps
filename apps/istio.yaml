@@ -27,6 +27,8 @@ spec:
               proxyMetadata:
                 CA_ADDR: "cert-manager-istio-csr.cert-manager.svc:443"
                 ISTIO_META_CERT_SIGNER: "istio-csr"
+                OUTPUT_CERTS: /etc/certs
+              secretRotationInterval: 10m 
           
           extraContainerArgs:
             - --tlsCertFile=/etc/cert-manager/tls/tls.crt
