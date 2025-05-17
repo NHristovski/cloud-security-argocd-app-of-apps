@@ -1588,7 +1588,7 @@ data:
               "expr": "irate(jvm_gc_pause_seconds_count{pod=\"$instance\", application=\"$application\", namespace=\"$Namespace\"}[$__rate_interval])",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} [{{cause}}]",
+              "legendFormat": "{{"{{"}}action}} [{{"{{"}}cause}}]",
               "range": true,
               "refId": "A"
             }
@@ -1692,7 +1692,7 @@ data:
               "expr": "irate(jvm_gc_pause_seconds_sum{pod=\"$instance\", application=\"$application\", namespace=\"$Namespace\"}[$__rate_interval])",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{action}} [{{cause}}]",
+              "legendFormat": "{{"{{"}}action}} [{{"{{"}}cause}}]",
               "range": true,
               "refId": "A"
             }
@@ -2409,7 +2409,7 @@ data:
               "expr": "irate(http_server_requests_seconds_count{pod=\"$instance\", application=\"$application\", uri!~\".*(prometheus|health).*\", namespace=\"$Namespace\"}[$__rate_interval])",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} [{{status}}] - {{uri}}",
+              "legendFormat": "{{"{{"}}method}} [{{"{{"}}status}}] - {{"{{"}}uri}}",
               "range": true,
               "refId": "A"
             }
@@ -2512,7 +2512,7 @@ data:
               "expr": "irate(http_server_requests_seconds_sum{pod=\"$instance\", application=\"$application\", exception=\"none\", uri!~\".*(prometheus|health).*\", namespace=\"$Namespace\"}[$__rate_interval]) / irate(http_server_requests_seconds_count{pod=\"$instance\", application=\"$application\", exception=\"none\",uri!~\".*(prometheus|health).*\", namespace=\"$Namespace\"}[$__rate_interval])",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{method}} [{{status}}] - {{uri}}",
+              "legendFormat": "{{"{{"}}method}} [{{"{{"}}status}}] - {{"{{"}}uri}}",
               "range": true,
               "refId": "A"
             }
