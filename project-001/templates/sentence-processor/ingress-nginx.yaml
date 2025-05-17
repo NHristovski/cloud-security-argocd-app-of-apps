@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: vault-issuer
+  labels:
+    app.kubernetes.io/name: sentence-processor
+  name: sentence-processor-nginx
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: sentence-processor-nginx.127.0.0.1.sslip.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: sentence-processor
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - sentence-processor-nginx.127.0.0.1.sslip.io
+      secretName: sentence-processor-nginx-tls
