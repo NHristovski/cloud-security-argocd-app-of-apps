@@ -30,7 +30,7 @@ spec:
             drop:
               - ALL
           seccompProfile:
-          type: RuntimeDefault
+            type: RuntimeDefault
           readOnlyRootFilesystem: true
         
         envFromSecret: grafana-oidc-client-secret
