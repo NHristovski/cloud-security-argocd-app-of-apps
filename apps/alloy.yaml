@@ -16,6 +16,15 @@ spec:
     - repoURL: https://github.com/NHristovski/cloud-security-argocd-app-of-apps
       path: alloy
       targetRevision: main
+      helm:
+        values: |
+          securityContext:
+            allowPrivilegeEscalation: true
+            runAsNonRoot: false
+            runAsUser: 0
+            capabilities:
+              drop:
+                - ALL
   syncPolicy:
     managedNamespaceMetadata:
       labels:

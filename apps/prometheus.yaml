@@ -18,6 +18,21 @@ spec:
       targetRevision: "26.0.1"
       helm:
         values: |
+          server:
+            securityContext:
+              runAsUser: 65534
+              runAsNonRoot: true
+              runAsGroup: 65534
+              fsGroup: 65534
+            containerSecurityContext: 
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+              seccompProfile:
+              type: RuntimeDefault
+              readOnlyRootFilesystem: true
+
           prometheus-pushgateway:
             enabled: false
           prometheus-node-exporter:

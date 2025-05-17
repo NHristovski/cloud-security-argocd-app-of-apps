@@ -18,7 +18,23 @@ spec:
     targetRevision: 8.13.1
     helm:
       values: |
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 472
+          runAsGroup: 472
+          fsGroup: 472
+        
+        containerSecurityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          seccompProfile:
+          type: RuntimeDefault
+          readOnlyRootFilesystem: true
+        
         envFromSecret: grafana-oidc-client-secret
+        
         datasources:
           datasources.yaml:
             apiVersion: 1
