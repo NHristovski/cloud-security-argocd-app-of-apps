@@ -73,3 +73,8 @@ secrets:
   redis:
     name: redis-password
     key: password
+
+podAnnotations:
+  prometheus.io/scrape5: "true"
+  prometheus.io/path: "/actuator/prometheus"
+  prometheus.io/port: "8080"

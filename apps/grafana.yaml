@@ -116,6 +116,12 @@ spec:
             subPath: "istio.json" 
             configMap: istio-dashboard
             readOnly: true
+          - name: springboot-dashboard-configmap
+            mountPath: /var/lib/grafana/dashboards/default/springboot.json
+            subPath: "springboot.json" 
+            configMap: springboot-dashboard
+            readOnly: true 
+
   syncPolicy:
     managedNamespaceMetadata:
       labels:

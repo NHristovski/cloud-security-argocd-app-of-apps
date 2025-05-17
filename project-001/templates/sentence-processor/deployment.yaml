@@ -17,6 +17,10 @@ spec:
       labels:
         app.kubernetes.io/name: sentence-processor
         logging.enabled: 'true'
+      annotations:
+        prometheus.io/scrape5: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "8080"
     spec:
       containers:
         - image: nikolahristovski/devopsmasterstudies-sentenceprocessor:1.0.3
