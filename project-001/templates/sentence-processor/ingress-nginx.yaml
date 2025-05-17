@@ -3,9 +3,10 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: vault-issuer
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-{{/*    nginx.ingress.kubernetes.io/proxy-ssl-name: "sentence-processor.project-001.svc.cluster.local"*/}}
-{{/*    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"*/}}
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/upstream-vhost: sentence-processor.project-001.svc.cluster.local
   labels:
     app.kubernetes.io/name: sentence-processor
   name: sentence-processor-nginx

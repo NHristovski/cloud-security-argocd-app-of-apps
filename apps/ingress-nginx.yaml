@@ -18,12 +18,7 @@ spec:
       targetRevision: "4.12.2"
       helm:
         values: |
-          controller:
-            annotations:
-              traffic.sidecar.istio.io/includeInboundPorts: ""
-              traffic.sidecar.istio.io/excludeInboundPorts: "80,443"
-              traffic.sidecar.istio.io/excludeOutboundIPRanges: "10.43.0.1/32" 
-          
+          controller:          
             podAnnotations:
               traffic.sidecar.istio.io/includeInboundPorts: ""
               traffic.sidecar.istio.io/excludeInboundPorts: "80,443"
