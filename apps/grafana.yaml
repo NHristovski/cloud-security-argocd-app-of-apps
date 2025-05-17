@@ -110,6 +110,12 @@ spec:
             secretName: loki-datasource-secret
             mountPath: /etc/secrets
             readOnly: true
+        extraConfigmapMounts:
+          - name: istio-dashboard-configmap
+            mountPath: /var/lib/grafana/dashboards/default
+            subPath: "istio.json" 
+            configMap: istio-dashboard
+            readOnly: true
   syncPolicy:
     managedNamespaceMetadata:
       labels:
