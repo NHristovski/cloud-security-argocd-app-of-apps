@@ -121,7 +121,7 @@ spec:
             nginx.ingress.kubernetes.io/ssl-redirect: "false"
             nginx.ingress.kubernetes.io/use-regex: "true"
             nginx.ingress.kubernetes.io/service-upstream: "true"
-            nginx.ingress.kubernetes.io/upstream-vhost: grafana.monitoring.svc.cluster.local
+            
             nginx.ingress.kubernetes.io/enable-cors: "true"
             nginx.ingress.kubernetes.io/cors-allow-origin: "https://grafana.127.0.0.1.sslip.io/, http://grafana.monitoring.svc.cluster.local, https://grafana.monitoring.svc.cluster.local"
             nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
