@@ -34,6 +34,7 @@ spec:
                 nginx.ingress.kubernetes.io/use-regex: "true"
                 nginx.ingress.kubernetes.io/service-upstream: "true"
                 nginx.ingress.kubernetes.io/upstream-vhost: vault-server.vault.svc.cluster.local
+                nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 127.0.0.1/32"
   syncPolicy:
     managedNamespaceMetadata:
       labels:
