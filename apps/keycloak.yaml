@@ -35,7 +35,7 @@ spec:
             type: ClusterIP
           ingress:
             enabled: true
-            ingressClassName: traefik
+            ingressClassName: nginx
             hostname: keycloak.127.0.0.1.sslip.io
             pathType: Prefix
             extraTls:
@@ -44,7 +44,10 @@ spec:
                 secretName: keycloak-tls
             annotations:
               cert-manager.io/cluster-issuer: vault-issuer
-              traefik.ingress.kubernetes.io/router.middlewares: monitoring-secure-access@kubernetescrd
+              nginx.ingress.kubernetes.io/ssl-redirect: "false"
+              nginx.ingress.kubernetes.io/use-regex: "true"
+              nginx.ingress.kubernetes.io/service-upstream: "true"
+              nginx.ingress.kubernetes.io/upstream-vhost: keycloak.keycloak.svc.cluster.local
           postgresql:
             enabled: true
             auth:

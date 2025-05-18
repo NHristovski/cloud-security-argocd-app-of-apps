@@ -30,7 +30,10 @@ spec:
                   secretName: vault-tls
               annotations:
                 cert-manager.io/cluster-issuer: vault-issuer
-                traefik.ingress.kubernetes.io/router.middlewares: monitoring-secure-access@kubernetescrd
+                nginx.ingress.kubernetes.io/ssl-redirect: "false"
+                nginx.ingress.kubernetes.io/use-regex: "true"
+                nginx.ingress.kubernetes.io/service-upstream: "true"
+                nginx.ingress.kubernetes.io/upstream-vhost: vault-server.vault.svc.cluster.local
   syncPolicy:
     managedNamespaceMetadata:
       labels:

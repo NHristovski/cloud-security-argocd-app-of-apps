@@ -110,7 +110,10 @@ spec:
           
           annotations: 
             cert-manager.io/cluster-issuer: vault-issuer
-            traefik.ingress.kubernetes.io/router.middlewares: monitoring-secure-access@kubernetescrd
+            nginx.ingress.kubernetes.io/ssl-redirect: "false"
+            nginx.ingress.kubernetes.io/use-regex: "true"
+            nginx.ingress.kubernetes.io/service-upstream: "true"
+            nginx.ingress.kubernetes.io/upstream-vhost: grafana.monitoring.svc.cluster.local
             
           path: /
           pathType: Prefix
