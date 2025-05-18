@@ -34,21 +34,14 @@ spec:
           readOnlyRootFilesystem: true
         
         envFromSecret: grafana-oidc-client-secret
-        extraEnv:
-          - name: GF_SECURITY_ALLOW_EMBEDDING
-            value: "true"
-          - name: GF_CORS_ENABLED
-            value: "true"
-          - name: GF_CORS_ALLOW_CREDENTIALS
-            value: "true"
-          - name: GF_CORS_ALLOWED_ORIGINS
-            value: "https://grafana.127.0.0.1.sslip.io/,http://grafana.monitoring.svc.cluster.local,https://grafana.monitoring.svc.cluster.local"
-          - name: GF_CORS_ALLOWED_METHODS
-            value: "GET,POST,PUT,DELETE,OPTIONS"
-          - name: GF_CORS_ALLOWED_HEADERS
-            value: "accept,authorization,content-type,origin"
-          
-          
+
+        env:
+          GF_SECURITY_ALLOW_EMBEDDING: true
+          GF_CORS_ENABLED: true
+          GF_CORS_ALLOW_CREDENTIALS: true
+          GF_CORS_ALLOWED_ORIGINS: "https://grafana.127.0.0.1.sslip.io/,http://grafana.monitoring.svc.cluster.local,https://grafana.monitoring.svc.cluster.local" 
+          GF_CORS_ALLOWED_METHODS: "GET,POST,PUT,DELETE,OPTIONS" 
+          GF_CORS_ALLOWED_HEADERS: "accept,authorization,content-type,origin"
           
         datasources:
           datasources.yaml:
