@@ -106,7 +106,7 @@ spec:
             cookie_secure: false
         ingress:
           enabled: true          
-          ingressClassName: traefik
+          ingressClassName: nginx
           
           annotations: 
             cert-manager.io/cluster-issuer: vault-issuer

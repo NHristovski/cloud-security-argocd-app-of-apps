@@ -29,7 +29,7 @@ service:
 
 ingress:
   enabled: true
-  className: "traefik"
+  className: "nginx"
   annotations:
     cert-manager.io/cluster-issuer: vault-issuer
     nginx.ingress.kubernetes.io/ssl-redirect: "false"

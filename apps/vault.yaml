@@ -21,7 +21,7 @@ spec:
           server:
             ingress:
               enabled: true
-              ingressClassName: traefik
+              ingressClassName: nginx
               hostname: vault.127.0.0.1.sslip.io
               pathType: Prefix
               extraTls:
