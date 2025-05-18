@@ -1,26 +1,29 @@
-{{/*apiVersion: networking.k8s.io/v1*/}}
-{{/*kind: Ingress*/}}
-{{/*metadata:*/}}
-{{/*  annotations:*/}}
-{{/*    cert-manager.io/cluster-issuer: vault-issuer*/}}
-{{/*    traefik.ingress.kubernetes.io/router.middlewares: monitoring-secure-access@kubernetescrd*/}}
-{{/*  labels:*/}}
-{{/*    app.kubernetes.io/name: sentence-processor*/}}
-{{/*  name: sentence-processor*/}}
-{{/*spec:*/}}
-{{/*  ingressClassName: traefik*/}}
-{{/*  rules:*/}}
-{{/*    - host: sentence-processor.127.0.0.1.sslip.io*/}}
-{{/*      http:*/}}
-{{/*        paths:*/}}
-{{/*          - backend:*/}}
-{{/*              service:*/}}
-{{/*                name: sentence-processor*/}}
-{{/*                port:*/}}
-{{/*                  number: 8080*/}}
-{{/*            path: /*/}}
-{{/*            pathType: Prefix*/}}
-{{/*  tls:*/}}
-{{/*    - hosts:*/}}
-{{/*        - sentence-processor.127.0.0.1.sslip.io*/}}
-{{/*      secretName: sentence-processor-tls*/}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: vault-issuer
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/upstream-vhost: sentence-processor.project-001.svc.cluster.local
+  labels:
+    app.kubernetes.io/name: sentence-processor
+  name: sentence-processor
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: sentence-processor.127.0.0.1.sslip.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: sentence-processor
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - sentence-processor.127.0.0.1.sslip.io
+      secretName: sentence-processor-tls
