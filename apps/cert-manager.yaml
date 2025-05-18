@@ -23,7 +23,7 @@ spec:
   syncPolicy:
     managedNamespaceMetadata:
       labels:
-        istio-injection: enabled
+        istio-injection: disabled
     automated:
       prune: true
       selfHeal: true
