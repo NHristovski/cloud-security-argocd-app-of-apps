@@ -1,9 +1,9 @@
-!!!!!!!!! KUBERNETES VERSION 1.31.8
+VAULT:
 
 
+vault operator init
 
- vault operator init
-
+> EXAMPLE OUTPUT
 Unseal Key 1: a3+84Zapr5X+qw5gfKwlUarhLwL9gQWAJXtziFstwuvN
 Unseal Key 2: 0/XTCe3LBi+XQIztcPEJNB9nhcrpDUzpo9/TZZjGcnlj
 Unseal Key 3: kewyl1tpaYcnTBwDD11sRJfCdrJElOqwok5FZLiUx4pV
@@ -17,8 +17,8 @@ vault operator unseal kewyl1tpaYcnTBwDD11sRJfCdrJElOqwok5FZLiUx4pV
 Initial Root Token: hvs.YoBECx7Lq5f82CCK7WewMLh7
 
 https://developer.hashicorp.com/vault/tutorials/archive/kubernetes-cert-manager
+<
 
->
 export VAULT_ROOT_TOKEN=hvs.YoBECx7Lq5f82CCK7WewMLh7
 
 vault login $VAULT_ROOT_TOKEN
@@ -30,6 +30,7 @@ vault secrets tune -max-lease-ttl=8760h pki
 
 vault write pki/root/generate/internal common_name=sslip.io ttl=8760h
 
+> EXAMPLE OUTPUT
 -----BEGIN CERTIFICATE-----
 MIIDLDCCAhSgAwIBAgIUDfOJI7C1im3N8uCKrmkpuascVu0wDQYJKoZIhvcNAQEL
 BQAwEzERMA8GA1UEAxMIc3NsaXAuaW8wHhcNMjUwNTE2MjAzMDEwWhcNMjYwNTE2
@@ -49,7 +50,7 @@ rRZHFcTUmHcX14vnqs04rtxMox/sjwHd20UXNVmnB6SKPo2CbQGI3ERq3sU6GoOf
 x6PNiUfBJZpFICXmLctxQJAT7EXPnoutS6u1Y8ZUW7ylgEUy+5H0dc+zG6aYVyjI
 aiz/6WCZ3xuL4ZoqTqZlVBvW3EBH5ZIiVMNCILgnGqMCUC4cmgFYUat9rDe85BY8
 -----END CERTIFICATE-----
-
+<
 
 vault write pki/config/urls issuing_certificates="http://vault-server.vault.svc.cluster.local:8200/v1/pki/ca" crl_distribution_points="http://vault-server.vault.svc.cluster.local:8200/v1/pki/crl"
 
@@ -61,7 +62,6 @@ path "pki/sign/sslip-dot-io"    { capabilities = ["create", "update"] }
 path "pki/issue/sslip-dot-io"   { capabilities = ["create"] }
 EOF
 
-
 vault auth enable kubernetes
 
 vault write auth/kubernetes/config kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443"
@@ -70,7 +70,7 @@ vault write auth/kubernetes/role/issuer bound_service_account_names=issuer bound
 
 
 
-
+=======================================
 NGINX PROXY:
 
 root@8c89c46e898b:/usr/local/apache2# htpasswd -cb /tmp/pw admin admin
@@ -85,13 +85,13 @@ project001:$apr1$AO3bLnmv$BfkAmT7x1f8oQzbqTSBo.0
 
 
 
-=========
+=======================================
+ALL SECRETS:
 
-All secrets:
 1. grafana-realm | grafana-realm - > {
                                        "id": "87e35ed8-1e73-4bc0-8fbe-2408f6c25ff5",
                                        "realm": "grafana",
-                                       ...
+                                       ...   ( The content of the file ./keycloak-utils/grafana-realm-export.json )
 
 2. keycloak-admin-password | password -> admin
 3. keycloak-postgre-pw  | password -> admin
